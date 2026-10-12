@@ -1,7 +1,5 @@
 # DOSW_ParcialT2_JuanMunar
 
-Repositorio base y prerrequisitos técnicos para el **Parcial Práctico — Segundo Tercio (Parte 1.1)** de la asignatura **Desarrollo de Operaciones de Software (DOSW)** en la Escuela Colombiana de Ingeniería Julio Garavito.
-
 ---
 
 ## Índice
@@ -22,9 +20,8 @@ Repositorio base y prerrequisitos técnicos para el **Parcial Práctico — Segu
 ## 1. Datos del estudiante
 
 - **Nombre completo:** Juan David Munar  
-- **Materia:** Desarrollo de Operaciones de Software (DOSW)  
-- **Grupo:** [Tu Grupo aquí, ej. 1]  
-- **Profesor agregado al repositorio como colaborador:** ✔ Sí (Acceso otorgado)
+- **Grupo:**  1
+- **Profesor agregado al repositorio como colaborador:** Sí 
 
 ---
 
@@ -36,16 +33,11 @@ Microservicio backend desarrollado sobre Spring Boot 3 y Java 21 como base para 
 
 ## 3. Despliegue
 
-El servicio cuenta con despliegue automatizado en **Azure App Service (Linux Containers)**:
-
-| Recurso | URL | Estado |
-| :--- | :--- | :--- |
-| **Servicio Base (Azure)** | `https://<tu-app-name>.azurewebsites.net/` | En línea |
-| **Health Check Endpoint** | `https://<tu-app-name>.azurewebsites.net/api/v1/health` | 200 OK |
-| **Documentación Swagger UI** | `https://<tu-app-name>.azurewebsites.net/swagger-ui/index.html` | Disponible |
-| **OpenAPI Spec (JSON)** | `https://<tu-app-name>.azurewebsites.net/v3/api-docs` | Disponible |
-
-> **Nota:** Reemplazar `<tu-app-name>` con el identificador asignado a tu App Service en Azure.
+| Recurso | URL |
+| :--- | :--- |
+| **Servicio Base (Azure)** | `https://dosw-parcial-t2-jmunar-hsfmc4cwdfc7abh3.mexicocentral-01.azurewebsites.net/` |
+| **Health Check Endpoint** | `https://dosw-parcial-t2-jmunar-hsfmc4cwdfc7abh3.mexicocentral-01.azurewebsites.net/api/v1/health` |
+| **Documentación Swagger UI** | `https://dosw-parcial-t2-jmunar-hsfmc4cwdfc7abh3.mexicocentral-01.azurewebsites.net/swagger-ui/index.html` |
 
 ---
 
@@ -141,7 +133,7 @@ La configuración sigue el patrón de doce factores (*Twelve-Factor App*), permi
 | :--- | :--- | :--- | :--- |
 | `MONGODB_URI` | Cadena de conexión al clúster MongoDB | `mongodb://localhost:27017/dosw_parcial` | `mongodb+srv://user:pass@cluster.mongodb.net/dosw_prod` |
 | `PORT` | Puerto HTTP donde se enlaza el servidor | `8080` | `8080` |
-| `JWT_SECRET` | Clave secreta Base64 (mínimo 256 bits / 44 caracteres) | Clave de desarrollo incluida por defecto | `c2VjdXJlS2V5TXVzdEJlQXRMZWFzdDQ0Q2hhcnNMb25nRm9ySFMyNTY=` |
+| `JWT_SECRET` | Clave secreta Base64 (mínimo 256 bits / 44 caracteres) | Definida por variable de entorno | `<CLAVE_BASE64_MIN_44_CARACTERES>` |
 | `WEBSITES_PORT` | Puerto de enrutamiento para Azure App Service | `8080` | `8080` |
 
 ---
@@ -178,7 +170,7 @@ docker build -t dosw-parcial:local .
 # Ejecutar el contenedor
 docker run -d -p 8080:8080 \
   -e MONGODB_URI=mongodb://host.docker.internal:27017/dosw_parcial \
-  -e JWT_SECRET=dGhpc0lzQVNlY3JldEtleUZvckp3dFRva2VuR2VuZXJhdGlvbk1pbjQ0Q2hhcnM= \
+  -e JWT_SECRET=<TU_JWT_SECRET_BASE64> \
   --name dosw-parcial-app dosw-parcial:local
 ```
 
@@ -202,12 +194,12 @@ El reporte de JaCoCo se genera en:
 
 ### Evidencias de pruebas:
 - **Resultado de pruebas unitarias (`mvn test`):**
-  > *(Adjuntar captura de pantalla de la terminal con las pruebas en verde en `docs/images/test-results.png`)*
-  ![Pruebas Unitarias](docs/images/test-results.png)
+<img width="1236" height="463" alt="Captura de pantalla 2026-10-12 150356" src="https://github.com/user-attachments/assets/cc871b0c-0ad2-496e-a563-375f14c7c0d7" />
+
 
 - **Reporte de cobertura JaCoCo:**
-  > *(Adjuntar captura de pantalla del reporte HTML generado en `docs/images/jacoco-report.png`)*
-  ![Reporte JaCoCo](docs/images/jacoco-report.png)
+<img width="1051" height="168" alt="Captura de pantalla 2026-10-12 150446" src="https://github.com/user-attachments/assets/ddcb9be2-e736-4462-a458-aec7a405f095" />
+
 
 ---
 
@@ -225,8 +217,8 @@ docker run -p 8080:8080 dosw-parcial:local
 
 ### Evidencias de Docker:
 - **Contenedor en ejecución y verificación de salud:**
-  > *(Adjuntar captura de pantalla de `docker ps` y petición curl al endpoint `/api/v1/health` en `docs/images/docker-running.png`)*
-  ![Docker Running](docs/images/docker-running.png)
+<img width="1550" height="936" alt="image" src="https://github.com/user-attachments/assets/90dbbbd8-39d5-4739-a0f7-e67043eb5f4d" />
+<img width="1058" height="303" alt="image" src="https://github.com/user-attachments/assets/5fcb9611-63da-4e51-a4d5-a450bb58014f" />
 
 ---
 
@@ -247,8 +239,7 @@ El repositorio cuenta con un pipeline automatizado en **GitHub Actions** (`.gith
 
 ### Evidencias del pipeline:
 - **Pipeline de GitHub Actions en verde:**
-  > *(Adjuntar captura del workflow completado exitosamente en `docs/images/pipeline-success.png`)*
-  ![GitHub Actions Pipeline](docs/images/pipeline-success.png)
+<img width="1893" height="449" alt="image" src="https://github.com/user-attachments/assets/68a85aeb-97da-4b9d-a8f2-89d4e9af9756" />
 
 ---
 
@@ -256,10 +247,10 @@ El repositorio cuenta con un pipeline automatizado en **GitHub Actions** (`.gith
 
 Prerrequisito completado con cuentas activas para el diseño de arquitectura y maquetación de interfaces del parcial:
 
-- **Herramienta de Modelado (Lucidchart / Draw.io / Miro):**
-  > *(Adjuntar captura de pantalla de la cuenta activa en `docs/images/modeling-account.png`)*
-  ![Cuenta de Modelado](docs/images/modeling-account.png)
+- **Herramienta de Modelado (Drawio):**
+<img width="1919" height="938" alt="image" src="https://github.com/user-attachments/assets/fb1b8f81-89b3-48c1-a0ff-a0efd64e37ea" />
+
 
 - **Herramienta de Diseño de Interfaces (Figma):**
-  > *(Adjuntar captura de pantalla de la cuenta activa en `docs/images/figma-account.png`)*
-  ![Cuenta Figma](docs/images/figma-account.png)
+<img width="272" height="378" alt="image" src="https://github.com/user-attachments/assets/91f41c8f-459e-449f-98ab-8ca3eb49bc1a" />
+
